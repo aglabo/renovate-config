@@ -1,6 +1,11 @@
 {
+  "name": "renovate-config",
+  "_comment": "@(#) A custom Renovate configuration package",
+  "version": "1.0.0",
+  "description": "A custom Renovate configuration for your projects.",
+  "type": "module",
   "scripts": {
-    "prepare": "lefthook install",
+    "prepare": "node ./scripts/prepare-dev-env.js",
     "validate-config": "npx renovate-config-validator default.json"
   },
   "devDependencies": {
