@@ -9,7 +9,7 @@
     "validate-config": "npx renovate-config-validator default.json"
   },
   "devDependencies": {
-    "renovate": "^42.38.1"
+    "renovate": "^42.39.4"
   },
   "packageManager": "pnpm@10.24.0"
 }
