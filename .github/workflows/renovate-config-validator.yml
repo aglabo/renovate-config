@@ -21,7 +21,7 @@ name: Renovate Config Validator
 on:
   pull_request:
     paths:
-      - "default.json"
+      - ".renovaterc.json"
   workflow_dispatch:
 
 jobs:

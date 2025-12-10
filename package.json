@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "prepare": "node ./scripts/prepare-dev-env.js",
-    "validate-config": "npx renovate-config-validator default.json"
+    "validate-config": "npx renovate-config-validator .renovaterc.json"
   },
   "devDependencies": {
     "renovate": "^42.40.3"

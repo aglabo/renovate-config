@@ -16,14 +16,12 @@ If you discover a security vulnerability, please **do not open a public issue**.
 Instead, contact the maintainers directly via one of the following methods:
 
 - Private report via GitHub Security Advisories
-  [Create a security advisory](https://github.com/atsushifx/renovate-config/security/advisories/new)
+  [Create a security advisory](https://github.com/aglabo/renovate-config/security/advisories/new)
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
 Please include as much detail as possible to help us reproduce and verify the issue.
 We will review your report as soon as possible (typically within 5 business days) and coordinate a responsible disclosure.
-
-<!-- textlint-enable -->
 
 ## Disclosure Policy
 
@@ -36,4 +34,4 @@ We follow a **responsible disclosure** process:
 
 ---
 
-*This security policy applies to all repositories under the `@aglabo` and `@atsushifx` organizations.*
+For any urgent or sensitive matters, the maintainers will coordinate the response as the dedicated security contact.
