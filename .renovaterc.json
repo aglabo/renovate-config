@@ -1,3 +1,11 @@
+// src: .renovaterc.json
+// @(#) : renovate 基本設定
+//
+// Copyright (c) 2025 atsushifx <http://github.com/atsushifx>
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
