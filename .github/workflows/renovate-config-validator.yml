@@ -1,20 +1,10 @@
-#==============================================================================
-# Renovate Config Validator
-#==============================================================================
-# Purpose:
-#   Validates Renovate configuration file (default.json)
-#
-# Triggers:
-#   - Pull requests that modify default.json
-#   - Manual workflow dispatch
-#
-# Requirements:
-#   - Node.js 22
-#   - renovate package (devDependency)
+# src: ./.github/workflows/ci-scan-all.yml
+# @(#) : Caller workflow for all linting and scanning in .github repository
 #
 # Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
-# License: MIT - https://opensource.org/licenses/MIT
-#==============================================================================
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 
 name: Renovate Config Validator
 
@@ -34,20 +24,17 @@ jobs:
     steps:
       # Check out the repository
       - name: Checkout Repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
 
       # Set up Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version: "22"
 
-      # Install development dependencies (no package-lock.json required)
-      - name: Install devDependencies
-        run: npm install --only=dev
-
       # Run Renovate config validation
       - name: Validate Renovate Config
-        run: npm run validate-config
+        run: |
+          npx --yes --package renovate -- renovate-config-validator --strict .renovaterc.json

@@ -23,17 +23,17 @@
     "after 3am and before 6am on monday"
   ],
 
-  // PR スパムを避けるため無制限をやめる
+  // Avoid PR overflow by setting hourly limit
   "prHourlyLimit": 20,
 
-  // rebase だけはスケジュール外 OK にする
+  // Allow rebase even outside schedule
   "updateNotScheduled": true,
 
   // dependency dashboard = ON
   "dependencyDashboard": true,
 
-  // 内部チェック抑制（現設定を維持）
-  "internalChecksFilter": "none",
+  // Internal checks suppression (keep current settings)
+  // "internalChecksFilter": "none",
 
   // --- packageRules ---
   "packageRules": [
@@ -44,7 +44,7 @@
       "pinDigests": true
     },
     {
-      // major updates → グルーピング + ラベル + 自動マージなし
+      // Major updates: grouped, min release age, labels, no auto-merge
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "5 days",
       "addLabels": ["renovate/major"],
@@ -52,21 +52,32 @@
       "groupSlug": "major-updates"
     },
     {
-      // minor updates → 自動マージ + releaseAge
+      "matchPackageNames": [
+        "actions/checkout",
+        "actions/setup-node",
+        "actions/setup-python"
+      ],
+      "extends": [ "schedule:earlyMondays"  ],  // check updates weekly
+      "automerge": false,
+      "addLabels": ["security-critical"]
+    },
+    {
+      // Minor updates: auto-merge + release age
       "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "5 days",
       "addLabels": ["renovate/minor"],
       "automerge": true
     },
     {
-      // patch updates → 自動マージ + releaseAge
+      // Patch updates: auto-merge + release age
       "matchUpdateTypes": ["patch"],
       "minimumReleaseAge": "3 days",
       "addLabels": ["renovate/patch"],
       "automerge": true
     },
     {
-      // pin updates → 自動マージ
+      // Pin updates: auto-merge GitHub Actions only
+      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["pin"],
       "addLabels": ["renovate/pin"],
       "automerge": true
