@@ -1,4 +1,4 @@
-# Common Renovate configuration for oota-sushikuitee
+# Common Renovate configuration for aglabo/atsushifx
 
 ## About
 
@@ -9,7 +9,7 @@ GitHub Organization全体で有効化したいRenovateの設定をまとめた�
 ```json
 {
   "extends": [
-    "github>oota-sushikuitee/renovate-config"
+    "github>aglabo/renovate-config"
   ]
 }
 ```
