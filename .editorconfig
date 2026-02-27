@@ -1,7 +1,7 @@
 # src: shared/configs/secretlint.config.base.yaml
 # @(#) : editorconfig base configs (templates)
 #
-# Copyright (c) 2025 atsushifx <https://github.com/atsushifx>
+# Copyright (c) 2025- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
@@ -38,12 +38,7 @@ tab_width = 2
 # ─────────────────────────────
 # YAML
 # ─────────────────────────────
-[*.yaml]
-indent_style = space
-indent_size = 2
-tab_width = 2
-
-[*.yml]
+[*.{yaml,yml}]
 indent_style = space
 indent_size = 2
 tab_width = 2
