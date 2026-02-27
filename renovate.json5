@@ -9,7 +9,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    ":label(renovate)",
+    "schedule:weekly",       // 週次実行
+    ":automergeMinor",
   ],
 
   // --- 基本設定 ---
