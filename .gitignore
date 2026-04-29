@@ -1,11 +1,13 @@
 # src: .gitignore
 # @(#) : mainly ignored files and directories
 #
-# Copyright (c) 2025- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
+# ignore words for Python files, including pycache and pybuilder
+# cspell:words pycache codz pybuilder
 
 ##  General
 #   OS specific files
@@ -20,16 +22,16 @@ thumbs.db
 #   history, cache
 .history/
 .cache/
-**/*cache
+# **/*cache
 
 
 #   backup/swap/temp
 $~*
 ~*
 *~
-*tmp
-*swp
-*lock
+*.tmp
+*.swp
+*.lock
 
 # session files
 *session.json
@@ -60,6 +62,10 @@ $~*
 # agents can tracking
 !.claude/agents/
 !.claude/agents/**
+!.claude/rules/
+!.claude/rules/**
+!.claude/commands/
+!.claude/commands/**
 
 # MCP server dependency files
 .cocoindex_code/
@@ -71,10 +77,6 @@ temp/
 tmp/
 **/temp/
 **/tmp/
-
-# lock file
-pnpm*lock.yaml
-
 
 ##  Editor
 #   VSCode
@@ -88,3 +90,4 @@ pnpm*lock.yaml
 
 ## Node
 node_modules/
+
