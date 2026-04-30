@@ -1,89 +1,112 @@
-// src: .renovaterc.json
-// @(#) : renovate 基本設定
+// src: renovate.json5
+// @(#) : Renovate configuration for aglabo/atsushifx
 //
-// Copyright (c) 2025 atsushifx <http://github.com/atsushifx>
+// Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+// cspell:words gomod
+
+// ---
 {
+  // Renovate configuration schema
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  // Base configuration presets
+  // config:recommended: Renovate recommended settings
+  // :label(renovate): add "renovate" label to all PRs
   "extends": [
     "config:recommended",
     ":label(renovate)",
-    "schedule:weekly",       // 週次実行
-    ":automergeMinor",
   ],
 
-  // --- 基本設定 ---
   "timezone": "Asia/Tokyo",
 
+  // Enabled package managers
+  "enabledManagers": [
+    "github-actions",
+    "deno",
+    "npm",
+    "pnpm",
+  ],
+
+  // PR creation schedule: every Monday 1am-3am
   "schedule": [
-    "after 1am and before 3am on monday"
+    "after 1am and before 3am on monday",
   ],
 
+  // Automerge schedule: every Monday 3am-6am
   "automergeSchedule": [
-    "after 3am and before 6am on monday"
+    "after 3am and before 6am on monday",
   ],
 
-  // Avoid PR overflow by setting hourly limit
-  "prHourlyLimit": 20,
+  // PR rate limits
+  // NOTE: README specifies no limit, but limits are applied for operational safety
+  // prHourlyLimit: max PRs created per hour
+  // prConcurrentLimit: max open PRs at a time
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
 
-  // Allow rebase even outside schedule
+  // Enable updates/rebases outside schedule for security fixes
   "updateNotScheduled": true,
 
-  // dependency dashboard = ON
   "dependencyDashboard": true,
+  "dependencyDashboardApproval": false,
 
-  // Internal checks suppression (keep current settings)
-  // "internalChecksFilter": "none",
+  "rebaseWhen": "behind-base-branch",
+  "rollbackPrs": true,
 
-  // --- packageRules ---
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on monday"]
+  }
+
+  // Package rules: label assignment and automerge settings per update type
   "packageRules": [
+    // major update: label only, automerge disabled
     {
-      // GitHub Actions のみ replace（digest pinning）
-      "matchManagers": ["github-actions"],
-      "rangeStrategy": "replace",
-      "pinDigests": true
-    },
-    {
-      // Major updates: grouped, min release age, labels, no auto-merge
       "matchUpdateTypes": ["major"],
-      "minimumReleaseAge": "5 days",
-      "addLabels": ["renovate/major"],
-      "groupName": "major dependency updates",
-      "groupSlug": "major-updates"
-    },
-    {
-      "matchPackageNames": [
-        "actions/checkout",
-        "actions/setup-node",
-        "actions/setup-python"
-      ],
-      "extends": [ "schedule:earlyMondays"  ],  // check updates weekly
+      "addLabels": ["update: major"],
       "automerge": false,
-      "addLabels": ["security-critical"]
+      "minimumReleaseAge": "7 days",
+      "dependencyDashboardApproval": true,
     },
+
+    // minor update: label, automerge after 5 days from release
     {
-      // Minor updates: auto-merge + release age
       "matchUpdateTypes": ["minor"],
+      "addLabels": ["update: minor"],
+      "automerge": true,
       "minimumReleaseAge": "5 days",
-      "addLabels": ["renovate/minor"],
-      "automerge": true
     },
+
+    // patch update: label, automerge after 3 days from release
     {
-      // Patch updates: auto-merge + release age
       "matchUpdateTypes": ["patch"],
+      "addLabels": ["update: patch"],
+      "automerge": true,
       "minimumReleaseAge": "3 days",
-      "addLabels": ["renovate/patch"],
-      "automerge": true
     },
+
+    // pin update: label, automerge immediately
     {
-      // Pin updates: auto-merge GitHub Actions only
-      "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["pin"],
-      "addLabels": ["renovate/pin"],
-      "automerge": true
-    }
-  ]
+      "addLabels": ["update: pin"],
+      "automerge": true,
+    },
+
+    // GitHub Actions: pin digest (SHA256) for all actions except actions/* namespace
+    // Step 1: enable pinDigests for all GitHub Actions
+    {
+      "matchManagers": ["github-actions"],
+      "pinDigests": true,
+    },
+    // Step 2: disable pinDigests for actions/* (official actions are managed by tags)
+    {
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["^actions/"],
+      "pinDigests": false,
+    },
+  ],
 }
