@@ -6,9 +6,6 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-# ignore words for Python files, including pycache and pybuilder
-# cspell:words pycache codz pybuilder
-
 ##  General
 #   OS specific files
 .DS_Store
@@ -43,6 +40,13 @@ $~*
 .env*
 .env.*
 
+# release
+releases/*
+!releases/.keep
+
+##  Git
+!**/.gitignore
+
 ## Development tools (installed locally)
 .tools/
 
@@ -60,6 +64,7 @@ $~*
 .claude/*
 
 # agents can tracking
+!**/CLAUDE*.md
 !.claude/agents/
 !.claude/agents/**
 !.claude/rules/
@@ -71,6 +76,7 @@ $~*
 .cocoindex_code/
 .serena/
 .lsmcp/
+.codegraph/*
 
 ## Temporary directories are never tracked
 temp/
@@ -90,4 +96,3 @@ tmp/
 
 ## Node
 node_modules/
-
