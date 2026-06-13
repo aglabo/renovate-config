@@ -1,10 +1,11 @@
 # src: .gitignore
-# @(#) : mainly ignored files and directories
+# @(#) : main ignored settings: renovate config
 #
 # Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
+
 
 ##  General
 #   OS specific files
@@ -62,6 +63,9 @@ releases/*
 
 # claude code setting
 .claude/*
+
+# settings
+!.claude/**/settings.json
 
 # agents can tracking
 !**/CLAUDE*.md
