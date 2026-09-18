@@ -6,69 +6,67 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
+# default: ignore all files
+*
 
-##  General
-#   OS specific files
-.DS_Store
-thumbs.db
+# Allow README, LICENSE, CONTRIBUTING
+!**/README*
+!**/LICENSE*
+!**/CONTRIBUTING*
 
-#   logs, patches
-*.log
-*.diff
-*.patch
+# Allow .github directories
+!.github/
+!.github/**
 
-#   history, cache
-.history/
-.cache/
-# **/*cache
+# Allow other ignore
+!*ignore
+
+# Allow editorconfig
+!**/.editorconfig
+
+# Allow settings
+!**/settings.json
 
 
-#   backup/swap/temp
-$~*
-~*
-*~
-*.tmp
-*.swp
-*.lock
+## Root configs
+!/package.json
+!/pnpm-lock.yaml
+!/renovate.json5
+!/lefthook.yml
+!/dprint.jsonc
+!/.shellspec
+!/.mcp.json
+!/**/CHANGELOG.md
+!/Release-Note.md
 
-# session files
-*session.json
-*session
-**/*session.json
-**/*session
+## Projects directories
+# config files
+!/configs/
+!/configs/**
+!/configs/**/*.json
+!/configs/**/*.yml
+!/configs/**/*.yaml
+!/configs/**/*.toml
+!/configs/**/*.mjs
 
-# .env files
-.env*
-.env.*
 
-# release
-releases/*
-!releases/.keep
 
-##  Git
-!**/.gitignore
+# allow shell scripts
+!/scripts/
+!/scripts/**
+!/scripts/**/*.sh
 
-## Development tools (installed locally)
-.tools/
 
-## Worktrees
-# worktree base dir
-.worktrees/
 
-## AI generated files
 
-## Coding AI depended
-# SDD (Spec-Driven Development) files
-**/.cc-sdd/
+# Website (allowlist details: aglabo.github.io/.gitignore)
+!/aglabo.github.io/
 
-# claude code setting
-.claude/*
 
-# settings
-!.claude/**/settings.json
-
-# agents can tracking
+## AI Agents
+# claude code
 !**/CLAUDE*.md
+!.claude/
 !.claude/agents/
 !.claude/agents/**
 !.claude/rules/
@@ -76,27 +74,61 @@ releases/*
 !.claude/commands/
 !.claude/commands/**
 
-# MCP server dependency files
-.cocoindex_code/
-.serena/
-.lsmcp/
-.codegraph/*
-
-## Temporary directories are never tracked
-temp/
-tmp/
-**/temp/
-**/tmp/
 
 ##  Editor
 #   VSCode
-.vscode/*
+!.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 !.vscode/cspell*
+!.vscode/cspell*/**
 
-## Node
-node_modules/
+
+##  Git
+# allow all gitignore
+!**/.gitignore
+
+
+## Deny rules (keep last)
+# Recursive allowlists (!/scripts/**, !.github/**, ...) follow last-match-wins,
+# so they can re-track backup, cache and temporary files under those directories.
+# Keep this deny section at the end of the file so it always takes precedence.
+
+#   OS specific files
+.DS_Store
+thumbs.db
+
+#   logs, patches
+**/*.log
+**/*.diff
+**/*.patch
+
+#   history, cache
+**/.history/
+**/.cache/
+
+#   backup/swap/temp
+**/$~*
+**/~*
+**/*~
+**/*.tmp
+**/*.swp
+**/*.lock
+
+#   session files
+**/*session.json
+**/*session
+
+#   .env files
+**/.env*
+
+#   temporary directories
+**/temp/
+**/tmp/
+
+#   node
+**/node_modules/
+**/.pnpm-store/

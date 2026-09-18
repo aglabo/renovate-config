@@ -26,9 +26,8 @@
   // Enabled package managers
   "enabledManagers": [
     "github-actions",
-    "deno",
     "npm",
-    "pnpm",
+    "pnpm"
   ],
 
   // PR creation schedule: every Monday 1am-3am
