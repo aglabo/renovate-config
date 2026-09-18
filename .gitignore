@@ -31,7 +31,7 @@
 ## Root configs
 !/package.json
 !/pnpm-lock.yaml
-!/renovate.json
+!/renovate.json5
 !/lefthook.yml
 !/dprint.jsonc
 !/.shellspec
@@ -66,8 +66,13 @@
 ## AI Agents
 # claude code
 !**/CLAUDE*.md
-# allowlist details: .claude/.gitignore
 !.claude/
+!.claude/agents/
+!.claude/agents/**
+!.claude/rules/
+!.claude/rules/**
+!.claude/commands/
+!.claude/commands/**
 
 
 ##  Editor
@@ -88,9 +93,9 @@
 
 
 ## Deny rules (keep last)
-# ��̍ċA allowlist (!/scripts/**, !.github/** �Ȃ�) �͍Ō�Ɉ�v�����K����
-# �����ߤA�@���E�������܂ł��ĂђǐՑΏۂɂ��Ă��܂��B
-# �������ēx���O���邱�̾Z�N�V��ݓ�ͤA�K���t�@�Cً�����ɒu�����ơB
+# Recursive allowlists (!/scripts/**, !.github/**, ...) follow last-match-wins,
+# so they can re-track backup, cache and temporary files under those directories.
+# Keep this deny section at the end of the file so it always takes precedence.
 
 #   OS specific files
 .DS_Store
