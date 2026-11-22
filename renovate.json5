@@ -26,8 +26,7 @@
   // Enabled package managers
   "enabledManagers": [
     "github-actions",
-    "npm",
-    "pnpm"
+    "npm"
   ],
 
   // PR creation schedule: every Monday 1am-3am
@@ -59,7 +58,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["before 3am on monday"]
-  }
+  },
 
   // Package rules: label assignment and automerge settings per update type
   "packageRules": [
@@ -104,7 +103,7 @@
     // Step 2: disable pinDigests for actions/* (official actions are managed by tags)
     {
       "matchManagers": ["github-actions"],
-      "matchPackagePatterns": ["^actions/"],
+      "matchPackageNames": ["/^actions\\//"],
       "pinDigests": false,
     },
   ],
