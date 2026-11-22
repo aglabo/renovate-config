@@ -1,12 +1,12 @@
-# src: ./.github/workflows/ci-workflows-qa.yml
-# @(#) : Caller workflow for GitHub Actions workflow QA in .github repository
+# src: .github/workflows/ci-workflows-qa.yml
+# @(#) : Caller workflow for GitHub Actions workflow QA
 #
-# Copyright (c) 2025- atsushifx <https://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-name: "CI Workflows QA"
+name: "CI: Workflows QA"
 
 # Minimal permissions following security best practices
 permissions:
@@ -27,15 +27,25 @@ on:
 
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-caller-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   actionlint:
     name: Actionlint
     permissions:
       contents: read
-    uses: aglabo/ci-platform/.github/workflows/ru-qa-actionlint.yml@14c82cd1052ef48b10f58f7e814ad52fa328c50f # v0.3.5
+    uses: aglabo/ci-platform/.github/workflows/ru-qa-actionlint.yml@615596f3e335f51338fb76c360d3434a346f01d9 # v0.8.1
 
   ghalint:
     name: Ghalint
     permissions:
       contents: read
-    uses: aglabo/ci-platform/.github/workflows/ru-qa-ghalint.yml@14c82cd1052ef48b10f58f7e814ad52fa328c50f # v0.3.5
+    uses: aglabo/ci-platform/.github/workflows/ru-qa-ghalint.yml@615596f3e335f51338fb76c360d3434a346f01d9 # v0.8.1
+
+  actions-lock:
+    name: Actions Lock
+    permissions:
+      contents: read
+    uses: aglabo/ci-platform/.github/workflows/ru-qa-actions-lock.yml@615596f3e335f51338fb76c360d3434a346f01d9 # v0.8.1
