@@ -1,14 +1,19 @@
 # src: .gitignore
-# @(#) : main ignored settings: renovate config
+# @(#) : main ignore settings: template
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-# default: ignore all files
+## ------------------------------------------------------------
+##   default: ignore all files
 *
 
+## ---------------------------------------------------------------
+##   General
+
+## Basic Documents
 # Allow README, LICENSE, CONTRIBUTING
 !**/README*
 !**/LICENSE*
@@ -18,9 +23,6 @@
 !.github/
 !.github/**
 
-# Allow other ignore
-!*ignore
-
 # Allow editorconfig
 !**/.editorconfig
 
@@ -29,43 +31,55 @@
 
 
 ## Root configs
-!/package.json
-!/pnpm-lock.yaml
-!/renovate.json5
-!/lefthook.yml
-!/dprint.jsonc
-!/.shellspec
-!/.mcp.json
-!/**/CHANGELOG.md
-!/Release-Note.md
+!**/package.json
+!**/pnpm-lock.yaml
+!**/renovate.json
+!**/lefthook.yml
+!**/dprint.jsonc
+!**/.shellspec
+!**/.mcp.json
+!/tsconfig.json
+!/vitest.config.ts
+!**/CHANGELOG.*
+!**/Release-Note.*
 
-## Projects directories
+## Project directories
 # config files
-!/configs/
-!/configs/**
-!/configs/**/*.json
-!/configs/**/*.yml
-!/configs/**/*.yaml
-!/configs/**/*.toml
-!/configs/**/*.mjs
+!configs/
+!configs/**
+!configs/**/*.json
+!configs/**/*.yml
+!configs/**/*.yaml
+!configs/**/*.toml
+!configs/**/*rc
+!configs/**/*.js
+!configs/**/*.mjs
 
-
-
-# allow shell scripts
-!/scripts/
+# runners & scripts
+!/runners
+!/runners/**
+!/runners/**/*.sh
+!/scripts
 !/scripts/**
 !/scripts/**/*.sh
+!/scripts/**/*.ts
 
 
-
-
-# Website (allowlist details: aglabo.github.io/.gitignore)
-!/aglabo.github.io/
+# Documents
+!/docs/
+!/docs/**/
+!/docs/**/*.md
+!/docs/**/*.mdx
 
 
 ## AI Agents
+# General
+!**/AGENT.md
+
 # claude code
 !**/CLAUDE*.md
+
+# allowlist details: .claude/.gitignore
 !.claude/
 !.claude/agents/
 !.claude/agents/**
@@ -73,7 +87,6 @@
 !.claude/rules/**
 !.claude/commands/
 !.claude/commands/**
-
 
 ##  Editor
 #   VSCode
@@ -86,16 +99,31 @@
 !.vscode/cspell*
 !.vscode/cspell*/**
 
+## ----------------------------------------------------------------
+##   Project Specific
 
-##  Git
-# allow all gitignore
-!**/.gitignore
+## source
+!src/
+!src/**/
+!src/**/*.ts
+!shared/
+!shared/**
+!shared/**/*.ts
 
+## ---------------------------------------------------------------
+##  Project specific
 
-## Deny rules (keep last)
-# Recursive allowlists (!/scripts/**, !.github/**, ...) follow last-match-wins,
-# so they can re-track backup, cache and temporary files under those directories.
-# Keep this deny section at the end of the file so it always takes precedence.
+# dictionaries (yaml source + generated txt)
+!/dict/
+!/dict/**
+
+# source (tests live in src/**/__tests__/{unit,functional,integration,e2e})
+!/src/
+!/src/**
+
+## ---------------------------------------------------------------
+##  Re-exclude: secrets and generated files
+##  Must stay last: these rules undo the broad allow rules above
 
 #   OS specific files
 .DS_Store
@@ -116,7 +144,7 @@ thumbs.db
 **/*~
 **/*.tmp
 **/*.swp
-**/*.lock
+# **/*.lock # track *.lock
 
 #   session files
 **/*session.json
@@ -124,11 +152,41 @@ thumbs.db
 
 #   .env files
 **/.env*
+!.env.example
+
+
+#   API keys / credentials
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/*apikey*
+**/*api-key*
+**/*api_key*
 
 #   temporary directories
-**/temp/
-**/tmp/
+**/temp
+**/tmp
 
 #   node
 **/node_modules/
 **/.pnpm-store/
+
+# Beads / Dolt files (added by bd init)
+!beads/
+!beads/**/SKILL.md
+
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+*.gate.lock*
+
+
+
+## ---------------------------------------------------------------
+##   Allow ignore
+
+# allow all gitignore
+!**/.gitignore
+!**/*ignore
