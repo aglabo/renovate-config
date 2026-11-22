@@ -14,10 +14,3 @@ updates:
       default-days: 7
     schedule:
       interval: "daily"
-updates:
-  - package-ecosystem: "pnpm" # for Workflows lockfile
-    directory: "/" # Location of package manifests
-    cooldown:
-      default-days: 7
-    schedule:
-      interval: "daily"
