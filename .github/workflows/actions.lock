@@ -3,6 +3,7 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
+    '.github/workflows/ci-docs-qa.yml': []
     '.github/workflows/ci-scan-secrets.yml': []
     '.github/workflows/ci-workflows-qa.yml': []
     '.github/workflows/renovate-config-validator.yml':
